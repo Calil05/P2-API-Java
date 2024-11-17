@@ -16,10 +16,10 @@ import application.model.Usuario;
 
 @Service
 public class TokenService {
-    //@Value("${api.security.token.key}")
-    //private String tokenKey;
+    @Value("${api.security.token.key}")
+    private String tokenKey;
 
-    private String tokenKey = "chaveToken";
+    //private String tokenKey = "chaveToken";
 
     private Instant expirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
@@ -29,7 +29,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(tokenKey);
             return JWT.create()
-                    .withIssuer("API Quizzes")
+                    .withIssuer("P2 API")
                     .withSubject(usuario.getNomeDeUsuario())
                     .withExpiresAt(this.expirationDate())
                     .sign(algorithm);
@@ -42,7 +42,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(tokenKey);
             return JWT.require(algorithm)
-                    .withIssuer("API Quizzes")
+                    .withIssuer("P2 API")
                     .build()
                     .verify(token)
                     .getSubject();

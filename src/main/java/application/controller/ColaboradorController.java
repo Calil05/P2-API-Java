@@ -20,32 +20,32 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 public class ColaboradorController {
 
     @Autowired
-    private ColaboradorService service;
+    private ColaboradorService colaboradorService;
 
     @GetMapping
     public Iterable<ColaboradorDTO> findAll() {
-        return service.findAll();
+        return colaboradorService.findAll();
     }
 
     @GetMapping("/{id}")
     public ColaboradorDTO findById(@PathVariable long id) {
-        return service.findById(id);
+        return colaboradorService.findById(id);
     }
 
     @PostMapping
     public ColaboradorDTO insert(@RequestBody ColaboradorDTO colaboradorDTO) {
-        return service.insert(colaboradorDTO);
+        return colaboradorService.insert(colaboradorDTO);
     }
 
     @PutMapping("/{id}")
     public ColaboradorDTO update(
             @PathVariable long id,
             @RequestBody ColaboradorDTO colaboradorDTO) {
-        return service.update(id, colaboradorDTO);
+        return colaboradorService.update(id, colaboradorDTO);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
-        service.delete(id);
+        colaboradorService.delete(id);
     }
 }

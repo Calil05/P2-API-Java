@@ -20,42 +20,42 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 public class TarefaController {
 
     @Autowired
-    private TarefaService service;
+    private TarefaService tarefaService;
 
     @GetMapping
     public Iterable<TarefaDTO> findAll() {
-        return service.findAll();
+        return tarefaService.findAll();
     }
 
     @GetMapping("/{id}")
     public TarefaDTO findById(@PathVariable long id) {
-        return service.findById(id);
+        return tarefaService.findById(id);
     }
 
     @PostMapping
     public TarefaDTO insert(@RequestBody TarefaDTO tarefaDTO) {
-        return service.insert(tarefaDTO);
+        return tarefaService.insert(tarefaDTO);
     }
 
     @PutMapping("/{id}")
     public TarefaDTO update(
             @PathVariable long id,
             @RequestBody TarefaDTO tarefaDTO) {
-        return service.update(id, tarefaDTO);
+        return tarefaService.update(id, tarefaDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteOne(@PathVariable long id) {
-        service.delete(id);
+        tarefaService.delete(id);
     }
 
     @PostMapping("/{tarefaId}/colaboradores/{colaboradorId}")
     public void insertColaborador(@PathVariable Long tarefaId, @PathVariable Long colaboradorId) {
-        service.insertColaborador(tarefaId, colaboradorId);
+        tarefaService.insertColaborador(tarefaId, colaboradorId);
     }
 
     @DeleteMapping("/{tarefaId}/colaboradores/{colaboradorId}")
     public void deleteColaborador(@PathVariable Long tarefaId, @PathVariable Long colaboradorId) {
-        service.deleteColaborador(tarefaId, colaboradorId);
+        tarefaService.deleteColaborador(tarefaId, colaboradorId);
     }
 }
