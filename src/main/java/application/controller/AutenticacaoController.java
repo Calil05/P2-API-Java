@@ -19,7 +19,7 @@ public class AutenticacaoController {
     private AuthenticationManager authManager;
 
     @Autowired
-    private TokenService tokenSrv;
+    private TokenService tokenService;
 
     @PostMapping
     public String login(@RequestBody Usuario usuario) {
@@ -29,6 +29,6 @@ public class AutenticacaoController {
 
         Authentication authentication = authManager.authenticate(tk);
 
-        return tokenSrv.generateToken(usuario);
+        return tokenService.generateToken(usuario);
     }
 }

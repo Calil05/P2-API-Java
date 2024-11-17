@@ -12,11 +12,11 @@ import application.repository.UsuarioRepository;
 @Service
 public class AppUserDataService implements UserDetailsService {
     @Autowired
-    private UsuarioRepository usuarioRepo;
+    private UsuarioRepository usuarioRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepo.findByNomeDeUsuario(username);
+        Usuario usuario = usuarioRepository.findByNomeDeUsuario(username);
 
         if(usuario == null) {
             throw new UsernameNotFoundException("Usuário Não Encontrado");

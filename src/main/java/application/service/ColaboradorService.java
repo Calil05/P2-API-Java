@@ -15,14 +15,14 @@ import application.repository.ColaboradorRepository;
 public class ColaboradorService {
 
     @Autowired
-    private ColaboradorRepository repository;
+    private ColaboradorRepository colaboradorRepository;
 
     public Iterable<ColaboradorDTO> findAll() {
-        return repository.findAll().stream().map(ColaboradorDTO::new).toList();
+        return colaboradorRepository.findAll().stream().map(ColaboradorDTO::new).toList();
     }
 
     public ColaboradorDTO findById(long id) {
-        Optional<Colaborador> resultado = repository.findById(id);
+        Optional<Colaborador> resultado = colaboradorRepository.findById(id);
         if (resultado.isEmpty()) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Colaborador Não Encontrado");
@@ -32,26 +32,26 @@ public class ColaboradorService {
 
     public ColaboradorDTO insert(ColaboradorDTO colaboradorDTO) {
         Colaborador colaborador = new Colaborador(colaboradorDTO);
-        Colaborador insertColaborador = repository.save(colaborador);
+        Colaborador insertColaborador = colaboradorRepository.save(colaborador);
         return new ColaboradorDTO(insertColaborador);
     }
 
     public ColaboradorDTO update(long id, ColaboradorDTO colaboradorDTO) {
-        if (!repository.existsById(id)) {
+        if (!colaboradorRepository.existsById(id)) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Colaborador Não Encontrado");
         }
         Colaborador novo = new Colaborador(colaboradorDTO);
         novo.setId(id);
-        Colaborador atualizado = repository.save(novo);
+        Colaborador atualizado = colaboradorRepository.save(novo);
         return new ColaboradorDTO(atualizado);
     }
 
     public void delete(long id) {
-        if (!repository.existsById(id)) {
+        if (!colaboradorRepository.existsById(id)) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Colaborador Não Encontrado");
         }
-        repository.deleteById(id);
+        colaboradorRepository.deleteById(id);
     }
 }
